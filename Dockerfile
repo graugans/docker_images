@@ -9,6 +9,9 @@ RUN apt-get update && apt-get -y upgrade
 # Required Packages for the Host Development System
 RUN apt-get install -y libboost-all-dev \
     git \
+    vim \
+    iputils-ping \
+    bash-completion \
     libgtest-dev \
     libgoogle-glog-dev \
     libxmlrpc-c++8-dev \
