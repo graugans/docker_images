@@ -1,7 +1,8 @@
 FROM ubuntu:16.04
 
-ENV http_proxy "http://172.25.121.103:3128"
-ENV https_proxy "http://172.25.121.103:3128"
+# Proxy settings
+#ENV http_proxy "http://172.25.121.103:3128"
+#ENV https_proxy "http://172.25.121.103:3128"
 
 RUN apt-get update && apt-get -y upgrade
 
