@@ -27,3 +27,9 @@ docker run -ti ifm3d:latest
 ```
 docker run -ti ifm3d:latest ifm3d dump
 ```
+
+# Use an interactive shell for development purposes
+
+```
+docker run --interactive --tty --entrypoint /bin/bash ifm3d:latest
+```
