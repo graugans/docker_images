@@ -9,8 +9,11 @@ RUN apt-get update && apt-get -y upgrade
 # Required Packages for the Host Development System
 RUN apt-get install -y libboost-all-dev \
     git \
-    vim \
+    vim-nox \
+    jq \
+    libcurl4-openssl-dev \
     iputils-ping \
+    bash \
     bash-completion \
     libgtest-dev \
     libgoogle-glog-dev \
