@@ -30,7 +30,7 @@ docker run -ti libo3d3xx:latest
 If you are working behind a cooperate firewall which uses a proxy server you can pass the proxy address to the docker run argument
 
 ```
-docker build --env http_proxy=http://<proxy address>:<proxy port> --env http_proxys=http://<proxy address>:<proxy port> -t libo3d3xx .
+docker run --env http_proxy=http://<proxy address>:<proxy port> --env http_proxys=http://<proxy address>:<proxy port> -t libo3d3xx .
 ```
 
 
