@@ -102,5 +102,11 @@ RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/if
 
 RUN sudo chmod a+rwx /ros_entrypoint.sh
 
+# Copy the config for reproducing the crash
+COPY ./ifm_config.json /home/ifm3d/ifm_config.json
+COPY ./hanging_publishers_test.py /home/ifm3d/hanging_publishers_test.py
+RUN sudo chmod a+rwx /home/ifm3d/ifm_config.json
+RUN sudo chmod a+rwx /home/ifm3d/hanging_publishers_test.py
+
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
