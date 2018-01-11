@@ -57,7 +57,11 @@ RUN rosdep init \
 # install ros packages
 ENV ROS_DISTRO kinetic
 RUN apt-get update && apt-get install -y \
-    ros-kinetic-desktop=1.3.1-0* \
+    ros-kinetic-desktop-full=1.3.1-0* \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y \
+    libhdf5-openmpi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user that will perform the actual build
@@ -78,12 +82,13 @@ RUN NPROC=`nproc||echo 1` &&  \
     sudo make -j$NPROC install
 
 # setup entrypoint
-COPY ./ros_entrypoint.sh /home/ifm3d/ros/
+COPY ./ros_entrypoint.sh /
 
 # install ifm3d-ros
 ENV LPR_ROS ~/ros
 
 RUN mkdir ~/dev && \
+    cd ~/dev && \
     git clone https://github.com/lovepark/ifm3d-ros.git
 
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/ifm3d/src && \
@@ -92,9 +97,9 @@ RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/if
     ln -s ~/dev/ifm3d-ros ifm3d && \
     cd ~/catkin/ifm3d && \
     catkin_make && \
-    catkin_make -DCMAKE_INSTALL_PREFIX=${LPR_ROS}/ifm3d install"
+    catkin_make -DCMAKE_INSTALL_PREFIX=/home/ifm3d/ros/ifm3d install"
 
-RUN sudo chmod a+rwx /home/ifm3d/ros/ros_entrypoint.sh
+RUN sudo chmod a+rwx /ros_entrypoint.sh
 
-ENTRYPOINT ["/home/ifm3d/ros/ros_entrypoint.sh"]
+ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
