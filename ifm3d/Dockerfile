@@ -10,7 +10,7 @@ ENV IFM3D_IP 192.168.0.69
 RUN apt-get update && apt-get -y upgrade
 
 # Required Packages for the Host Development System
-RUN apt-get install -y libboost-all-dev \
+RUN apt-get update && apt-get install -y libboost-all-dev \
     git \
     vim-nox \
     jq \
