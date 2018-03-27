@@ -75,11 +75,12 @@ RUN echo "ifm3d ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 USER ifm3d
 WORKDIR /home/ifm3d
 RUN git clone https://github.com/lovepark/ifm3d.git
-RUN NPROC=`nproc||echo 1` &&  \
+RUN /bin/bash -c "NPROC=`nproc||echo 1` &&  \
     mkdir build && \
     cd build && \
+    source /opt/ros/$ROS_DISTRO/setup.bash && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr ../ifm3d && \
-    sudo make -j$NPROC install
+    sudo make -j$NPROC install"
 
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
