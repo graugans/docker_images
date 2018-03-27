@@ -16,7 +16,7 @@ sudo docker build -t ifm3d-ros .
 If you are working behind a cooperate firewall which uses a proxy server you can pass the proxy address to the docker build argument
 
 ```
-docker build --build-env http_proxy=http://<proxy-address>:<proxy port> --build-env http_proxys=http://<proxy-address>:<proxy port> -t ifm3d-ros .
+docker build --build-arg http_proxy=http://<proxy-address>:<proxy port> --build-arg https_proxy=http://<proxy-address>:<proxy port> -t ifm3d-ros .
 ```
 
 ## Run the docker container
