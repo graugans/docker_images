@@ -11,7 +11,7 @@ Check your distribution information how to install docker
 Change to the folder containing the ``Dockerfile`` and execute the following command:
 
 ```
-sudo docker build --build-arg http_proxy=http://<proxy-address>:<proxy port> --build-arg http_proxys=http://<proxy-address>:<proxy port> -t ifm3d .
+sudo docker build --build-arg http_proxy=http://<proxy-address>:<proxy port> --build-arg https_proxy=http://<proxy-address>:<proxy port> -t ifm3d .
 ```
 
 ## Run the docker container

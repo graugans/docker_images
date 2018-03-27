@@ -29,7 +29,7 @@ docker run -ti ifm3d-ros:latest
 If you are working behind a cooperate firewall which uses a proxy server you can pass the proxy address to the docker run argument
 
 ```
-docker run --env http_proxy=http://<proxy address>:<proxy port> --env http_proxys=http://<proxy address>:<proxy port> -ti ifm3d-ros:latest .
+docker run --env http_proxy=http://<proxy address>:<proxy port> --env https_proxy=http://<proxy address>:<proxy port> -ti ifm3d-ros:latest .
 ```
 
 # Run the ifm3d command within the docker container
