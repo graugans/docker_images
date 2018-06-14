@@ -37,8 +37,15 @@ USER ifm3d
 WORKDIR /home/ifm3d
 RUN git clone https://github.com/lovepark/ifm3d.git
 RUN NPROC=`nproc||echo 1` &&  \
-    mkdir build && \
-    cd build && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr ../ifm3d && \
+    mkdir -p build/ifm3d && \
+    cd build/ifm3d && \
+    cmake -DBUILD_MODULE_PCICCLIENT=ON -DCMAKE_INSTALL_PREFIX=/usr ../../ifm3d && \
+    sudo make -j$NPROC install
+
+RUN git clone https://github.com/lovepark/ifm3d-examples.git
+RUN NPROC=`nproc||echo 1` &&  \
+    mkdir -p build/ifm3d-examples && \
+    cd build/ifm3d-examples && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr ../../ifm3d && \
     sudo make -j$NPROC install
 
