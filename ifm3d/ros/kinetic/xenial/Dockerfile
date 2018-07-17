@@ -74,23 +74,25 @@ RUN echo "ifm3d ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 USER ifm3d
 WORKDIR /home/ifm3d
-RUN git clone https://github.com/lovepark/ifm3d.git
+
+# Build & install ifm3d
+RUN git clone --branch v0.9.2 https://github.com/lovepark/ifm3d.git
 RUN /bin/bash -c "NPROC=`nproc||echo 1` &&  \
     mkdir build && \
     cd build && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr ../ifm3d && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_MODULE_PCICCLIENT=ON ../ifm3d && \
     sudo make -j$NPROC install"
 
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 
-# install ifm3d-ros
+# Build & install ifm3d-ros
 ENV LPR_ROS ~/ros
 
 RUN mkdir ~/dev && \
     cd ~/dev && \
-    git clone https://github.com/lovepark/ifm3d-ros.git
+    git clone --branch v0.5.1 https://github.com/lovepark/ifm3d-ros.git
 
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/ifm3d/src && \
     cd ~/catkin/ifm3d/src  && \
