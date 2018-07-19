@@ -94,7 +94,8 @@ ENV LPR_ROS ~/ros
 
 RUN mkdir ~/dev && \
     cd ~/dev && \
-    git clone --branch v0.5.1 https://github.com/lovepark/ifm3d-ros.git
+    git clone --branch vtkproj4-fix https://github.com/graugans/ifm3d-ros.git
+#    git clone --branch v0.5.1 https://github.com/lovepark/ifm3d-ros.git
 
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/ifm3d/src && \
     cd ~/catkin/ifm3d/src  && \
