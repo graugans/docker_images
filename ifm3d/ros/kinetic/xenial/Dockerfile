@@ -7,10 +7,10 @@ FROM ubuntu:16.04
 # change this if zour camera does have a different ip setting
 ENV IFM3D_IP 192.168.0.69
 
-RUN apt-get update && apt-get -y upgrade
-
 # Required Packages for the Host Development System
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    apt-get -y upgrade && \
+    apt-get install -y --no-install-recommends \
     libboost-all-dev \
     git \
     vim-nox \
@@ -23,8 +23,6 @@ RUN apt-get install -y --no-install-recommends \
     libgoogle-glog-dev \
     libxmlrpc-c++8-dev \
     libopencv-dev \
-    libpcl-dev \
-    libproj-dev \
     build-essential \
     coreutils \
     dirmngr \
@@ -84,7 +82,7 @@ RUN /bin/bash -c "NPROC=`nproc||echo 1` &&  \
     cd build && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_MODULE_PCICCLIENT=ON ../ifm3d && \
-    sudo make -j$NPROC install"
+    sudo make -j$NPROC -l$NPROC install"
 
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
@@ -94,8 +92,7 @@ ENV LPR_ROS ~/ros
 
 RUN mkdir ~/dev && \
     cd ~/dev && \
-    git clone --branch vtkproj4-fix https://github.com/graugans/ifm3d-ros.git
-#    git clone --branch v0.5.1 https://github.com/lovepark/ifm3d-ros.git
+    git clone --branch v0.5.1 https://github.com/lovepark/ifm3d-ros.git
 
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && mkdir -p ~/catkin/ifm3d/src && \
     cd ~/catkin/ifm3d/src  && \
