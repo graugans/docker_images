@@ -40,6 +40,7 @@ RUN echo "deb http://packages.ros.org/ros/ubuntu xenial main" > /etc/apt/sources
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
     python-rosdep \
+    python3-ros-buildfarm \
     python-rosinstall \
     python-vcstools \
     && rm -rf /var/lib/apt/lists/*
@@ -58,6 +59,7 @@ ENV ROS_DISTRO kinetic
 # --> https://github.com/osrf/docker_images/issues/171
 RUN apt-get update && apt-get install -y \
     ros-kinetic-desktop-full=1.3.2-0* \
+    python-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
