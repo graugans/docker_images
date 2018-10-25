@@ -48,8 +48,12 @@ ENV LC_ALL en_US.UTF-8
 
 # Create a non-root user that will perform the actual build
 RUN id ifm3d 2>/dev/null || useradd --uid 30000 --create-home -s /bin/bash -U ifm3d
-RUN apt-get install -y sudo
+RUN apt-get update && apt-get install -y sudo
 RUN echo "ifm3d ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
+
+# install additional tooling
+RUN apt-get update && apt-get install -y \
+    tmux
 
 # install vim plugins
 USER ifm3d
