@@ -80,7 +80,7 @@ RUN git clone https://github.com/lovepark/ifm3d-examples.git
 RUN NPROC=`nproc||echo 1` &&  \
     mkdir -p build/ifm3d-examples && \
     cd build/ifm3d-examples && \
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=/usr ../../ifm3d-examples && \
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=/usr ../../ifm3d-examples
 
 RUN /home/ifm3d/.vim/bundle/YouCompleteMe/install.py --clang-completer
 ADD .ycm_extra_conf.py /home/ifm3d/.vim
