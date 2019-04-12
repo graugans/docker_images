@@ -31,6 +31,12 @@ RUN apt-get update && \
     tmux \
     && rm -rf /var/lib/apt/lists/*
 
+# Add the universe repository to the package list
+RUN apt-get update && apt-get install -y \
+    software-properties-common
+RUN add-apt-repository universe
+
+
 # setup keys
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116
 
@@ -64,6 +70,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && apt-get install -y \
     libhdf5-openmpi-dev \
+    python-h5py \
+    ros-kinetic-ros-numpy \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user that will perform the actual build
