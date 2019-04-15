@@ -24,12 +24,12 @@ docker build --build-arg http_proxy=http://<proxy-address>:<proxy port> --build-
 To run the docker container execute the following command
 
 ```
-docker run -ti ifm3d-ros:latest
+docker run --name ros --mount type=bind,source=$(pwd)/target,target=/app  -ti ifm3d-ros:latest
 ```
 If you are working behind a cooperate firewall which uses a proxy server you can pass the proxy address to the docker run argument
 
 ```
-docker run --env http_proxy=http://<proxy address>:<proxy port> --env https_proxy=http://<proxy address>:<proxy port> -ti ifm3d-ros:latest .
+docker run --name ros --env http_proxy=http://<proxy-ip>:<proxy port> --env https_proxy=http://<proxy ip>:<proxy port> --mount type=bind,source=$(pwd)/target,target=/app  -ti ifm3d-ros:latest
 ```
 
 # Run the ifm3d command within the docker container
